@@ -1,0 +1,23 @@
+version: '3.2'
+services:
+  rtorrent-flood:
+    container_name: rtorrent-flood
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: spiritualized/rtorrent-flood
+
+    ports:
+      - "3000:3000/tcp"
+      - "49184:49184/tcp"
+      - "49184:49184/udp"
+
+    volumes:
+      - './homedir:/home/torrent'
+      - './flood-db:/flood-db'
+
+      - '/mnt/c/downloads:/data/downloads' # map download folders in this section
+
+    tty: true
+    restart: unless-stopped
+
